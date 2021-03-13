@@ -22,7 +22,7 @@ For this guide I used an external managed MySQL database on the same virtual net
 
 Assuming you are using an external managed database, be sure that it is visible to the VM. This is done by hosting on the same subnet, eg. if your VM has an IP of 10.0.0.1, the database could be on 10.0.0.2. 
 
-You will also need to open ports internally on the subnet for `3306` and `33060`, but restricting access to instances on the internal subnet only.
+You will also need to open ports internally on the subnet for `3306` and `33060` so that the database is not reachable by external devices on the internet.
 
 Be sure to remember the username and password!
 
