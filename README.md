@@ -106,6 +106,38 @@ Extract:
 
 You now have a directory called `wordpress` inside `/usr/local/lsws/Example/html`
 
+Setup the files ownership and permissions:
+
+```sudo chown -R nobody:nogroup /usr/local/lsws/Example/html/wordpress```
+
+```sudo find /usr/local/lsws/Example/html/wordpress/ -type d -exec chmod 750 {} \;```
+
+```sudo find /usr/local/lsws/Example/html/wordpress/ -type f -exec chmod 640 {} \;```
+
+Change the wp-config.php file to point wordpress to our external datatabse.
+
+```sudo nano /usr/local/lsws/Example/html/wordpress/wp-config.php```
+
+Where you find `** MySQL settings...` copy in the following using your own values:
+```
+// ** MySQL settings - You can get this info from your web host ** //
+/** The name of the database for WordPress */
+define( 'DB_NAME', 'wordpress' );
+
+/** MySQL database username */
+define( 'DB_USER', 'wp' );
+
+/** MySQL database password */
+define( 'DB_PASSWORD', 'MyRootPassword' );
+
+/** MySQL hostname */
+define( 'DB_HOST', '10.0.0.2' );
+```
+Below this you should paste in unique Salt Keys, which can be generated [at this site](https://api.wordpress.org/secret-key/1.1/salt/)
+
+Finally you are ready to install Wordpress :)
+
+
 
 
 
