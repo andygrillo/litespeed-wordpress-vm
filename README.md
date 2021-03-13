@@ -87,6 +87,14 @@ You will need PHP 7.4 or higher:
 
 ```sudo apt install lsphp74-common lsphp74-curl lsphp74-imap lsphp74-json lsphp74-mysql lsphp74-opcache lsphp74-imagick lsphp74-memcached lsphp74-redis```
 
+### Install Redis
+
+```sudo apt install redis```
+
+```sudo systemctl start redis-server```
+
+```sudo systemctl enable redis-server```
+
 ## Install and Configure OpenLiteSpeed
 Next, you need to configure the OpenLiteSpeed server to host your WordPress site. It requires you to set the right version of PHP processor, enable the rewrite module and several other features.
 
@@ -202,7 +210,7 @@ To ensure you get the best performance install the `LiteSpeed Cache` plugin. The
 - In `General` Tab:
 ![image](https://user-images.githubusercontent.com/6279965/111042969-84a46000-8405-11eb-8d31-a84973515fb9.png)
 - In `Cache` turn everything to `ON` except `Cache Mobile`.
-- In `Object` turn on `Object Cache` and choose Redis or Memcached. To install Redis you can follow this [guide](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-20-04). You should also turn on `Persistent Connection` and `Cache Wp-Admin`.
+- In `Object` turn on `Object Cache` and choose Redis. You should also turn on `Persistent Connection` and `Cache Wp-Admin`.
 - In `Browser` turn on the `Browser Cache`
 
 #### CDN Section
