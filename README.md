@@ -1,5 +1,5 @@
 # A High-Performance Wordpress Installation
-This guide will demonstrate how to setup a very fast Wordpress installation on a server with [OpenLiteSpeed](https://openlitespeed.org/), which typically performs better than Apache or NGinx. 
+This guide will demonstrate how to setup a very fast Wordpress installation on a server with [OpenLiteSpeed](https://openlitespeed.org/) which typically performs better than Apache or NGinx. Additionally a an external managed MySQL database was used, as well as a Cloudfare CDN.
 
 The OS used is Ubuntu 20.04.
 
