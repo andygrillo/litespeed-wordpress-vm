@@ -223,10 +223,55 @@ With the advent of Wordpress 5.7 it is now recommended to use Gutenberg, the bui
 
 I found the Kadence site to be very fast and also free !
 
+## Adding SSL
+Run `sudo apt install certbot`, then `sudo certbot certonly --webroot`.
+
+You will then be prompted to answer the following questions.
+
+-Enter Email address: Type in your email address
+-Accept the terms of service: A
+-Share your Email Address with EFF: Type Y for yes and N for No.
+-Enter Domain name: Type your FQDN (fully qualified domain name) here
+-Input the Web root: /usr/local/lsws/Example/html/wordpress/
+-Once you have answered all the questions and validation process is complete, the certificate files will be saved in /etc/letsencrypt/live/<your-domain>/ directory.
+
+Next, configure the WordPress site on your OpenLiteSpeed server to use the SSL certificate. Navigate to the Virtual Host configuration and open the SSL tab. Edit the SSL Private Key & Certificate.
+![image](https://user-images.githubusercontent.com/6279965/111043667-51fc6680-8409-11eb-809d-beafc7563866.png)
+
+Add these fields:
+ 
+ ```
+Private Key File: /etc/letsencrypt/live/<your-domain>/privkey.pem
+Certificate File: /etc/letsencrypt/live/<your-domain>/fullchain.pem
+Chained Certificate: Yes
+CA Certificate Path: /etc/letsencrypt/live/<your-domain>/fullchain.pem
+CA Certificate File: /etc/letsencrypt/live/<your-domain>/fullchain.pem
+```
+
+In Listeners add a new SSL listener:
+![image](https://user-images.githubusercontent.com/6279965/111043688-72c4bc00-8409-11eb-8622-8e527bbb0918.png)
+
+Add these fields:
+
+```
+Listener Name: SSL
+IP Address: ANY
+Post: 443
+Binding:
+Enable REUSEPORT: Not Set
+Secure: Yes
+```
+
+Save, then add a row in Listner SSL > General > Virtual Host Mappings:
+
+![image](https://user-images.githubusercontent.com/6279965/111043721-a69fe180-8409-11eb-89ae-588cae0a48ce.png)
+
+Now gracefully restart OpenLiteSpeed and you're ready.
+
+
 
 ## Credits
 Configuration of the OpenLiteSpeed server was based on this [guide on Upcloud.com](https://upcloud.com/community/tutorials/install-wordpress-openlitespeed/).
-
 
 
 
