@@ -11,10 +11,11 @@ This can be installed on a VM with most cloud providers (AWS, Azure, IBM, etc). 
 You should specify the CPU and RAM to match your expected load, but these are settings for a small/medium VM that have worked for me:
 - 2 CPUs
 - 8 GB RAM
-- Fixed IP address
+- 15 GB Drive
 
+Make sure you have a fixed IP address.
 
-Please open ports `80` and `443` for HTTP and HTTPS, and also `7080` for the OpenLiteSpeed dashboard.
+Open ports `80` and `443` for HTTP and HTTPS, and also `7080` for the OpenLiteSpeed dashboard.
 
 ### Database
 For this guide I used an external managed MySQL database on the same virtual network, although you are welcome to host a database on the same VM as Wordpress. By hosting the database separately you will typically have better performance as resources are not shared, and also a backup if the VM fails. If however you wish to install a local database you can with `sudo apt install mariadb-server`.
