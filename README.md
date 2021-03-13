@@ -44,13 +44,50 @@ Then reload the firewall
 
 ```sudo firewall-cmd --reload ```
 
+#### Create a database
+Create the MySQL client on the VM:
+
+```cd /tmp```
+
+```curl -OL https://dev.mysql.com/get/mysql-apt-config_0.8.15-1_all.deb```
+
+and add to your system's repository list and begin installation:
+
+```sudo dpkg -i mysql-apt-config*```
+
+During installation you will be be asked which product to configure. Just use the default by selecting `OK`. Then run `sudo apt update
+` to refresh your apt cache.
+
+Now install MySQL client and you're set:
+
+```sudo apt install mysql-shell```
+
+Login to the external datatbase using the correct IP address and user:
+
+```$ mysqlsh --sql root@10.0.0.2:3306```
+
+Once in the MySQL client:
+
+```mysql-js> CREATE DATABASE wordpress;```
+
+```mysql-js> CREATE USER wp IDENTIFIED BY 'MyCrazyP3assword!';```
+
+```mysql-js> GRANT ALL PRIVILEGES ON wordpress.* TO wp;```
+
 #### Install OpenLiteSpeed
 
 ```wget -O - http://rpms.litespeedtech.com/debian/enable_lst_debian_repo.sh | sudo bash```
 
 ```sudo apt-get install openlitespeed```
 
+#### Install PHP 7.4
 
+You will need PHP 7.4 or higher:
+
+```sudo apt-get install lsphp74```
+
+```sudo apt install lsphp74-common lsphp74-curl lsphp74-imap lsphp74-json \
+lsphp74-mysql lsphp74-opcache lsphp74-imagick lsphp74-memcached lsphp74-redis```
 
 
 
