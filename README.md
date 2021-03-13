@@ -3,6 +3,8 @@ This guide will demonstrate how to setup a very fast Wordpress installation on a
 
 The OS used is Ubuntu 20.04.
 
+
+
 ## Server Requirements
 This can be installed on a VM with most cloud providers (AWS, Azure, IBM, etc). This guide was tested on a VM in Oracle Cloud.
 
@@ -84,13 +86,65 @@ You will need PHP 7.4 or higher:
 
 ```sudo apt install lsphp74-common lsphp74-curl lsphp74-imap lsphp74-json lsphp74-mysql lsphp74-opcache lsphp74-imagick lsphp74-memcached lsphp74-redis```
 
+## Install and Configure OpenLiteSpeed
+Next, you need to configure the OpenLiteSpeed server to host your WordPress site. It requires you to set the right version of PHP processor, enable the rewrite module and several other features.
+
 ### Install OpenLiteSpeed
 
 ```wget -O - http://rpms.litespeedtech.com/debian/enable_lst_debian_repo.sh | sudo bash```
 
 ```sudo apt-get install openlitespeed```
 
-### Setup Wordpress
+### Dashboard
+Go to `Server Configuration > External App` and click on the edit button:
+![image](https://user-images.githubusercontent.com/6279965/111042627-e6fc6100-8403-11eb-94fc-72c6de6127e4.png)
+
+Here, you can configure your server to use any specific PHP processor. For this tutorial, we will use lsphp74.
+
+- Replace `lsphp` with `lsphp74`
+- Replace `uds://tmp/lshttpd/lsphp.sock` with `uds://tmp/lshttpd/lsphp74.sock`
+- Replace `lsphp73/bin/lsphp` with `$SERVER_ROOT/lsphp74/bin/lsphp`
+
+![image](https://user-images.githubusercontent.com/6279965/111042645-ff6c7b80-8403-11eb-8a23-62e07e04a7b1.png)
+
+Once changes are made, click the save icon in the upper right corner as shown above. 
+
+Moving next to configure the rewrite module which is an essential requirement for WordPress feature. Go to the `Virtual Hosts` and click on the view icon.
+
+![image](https://user-images.githubusercontent.com/6279965/111042666-1f03a400-8404-11eb-976d-26c341926d97.png)
+
+Click on the `General` tab and edit the `General options` with the edit icon at the top right corner.
+
+![image](https://user-images.githubusercontent.com/6279965/111042670-2460ee80-8404-11eb-806d-a8ed6233ae3a.png)
+
+In the `Document Root` field, type `$VH_ROOT/html/wordpress` and click the save button at the top right corner.
+
+![image](https://user-images.githubusercontent.com/6279965/111042717-56725080-8404-11eb-8042-3170c0fa0f4b.png)
+
+Then again on the `General` tab of `Virtual Hosts` configuration, click the edit icon next to `Index Files` section.
+
+![image](https://user-images.githubusercontent.com/6279965/111042727-638f3f80-8404-11eb-808b-83398cb9ff05.png)
+
+In the `Index Files` field, add `index.php` at the beginning of the section. Then click the save button at the top right corner.
+
+![image](https://user-images.githubusercontent.com/6279965/111042739-7275f200-8404-11eb-8b15-58a027781c0e.png)
+
+Next, go to the `Rewrite` tab of the `Virtual Hosts` configuration view and edit the `Rewrite Control` options.
+
+![image](https://user-images.githubusercontent.com/6279965/111042748-81f53b00-8404-11eb-8db6-06d7c1d3b75c.png)
+
+Set `Enable Rewrite` and `Auto Load` from `.htaccess` to Yes and click save icon at the top right corner.
+
+![image](https://user-images.githubusercontent.com/6279965/111042761-90435700-8404-11eb-8987-7d8436ea34a4.png)
+
+Once you’ve configured the OpenLiteSpeed server, Click the gracefully restart icon to apply the changes.
+
+![image](https://user-images.githubusercontent.com/6279965/111042770-99342880-8404-11eb-8182-065d14284e29.png)
+
+
+You should now
+
+## Install Wordpress
 
 Navigate to the virtual host:
 
@@ -103,6 +157,8 @@ Get latest Wordpress
 Extract:
 
 ```tar xvfz latest.tar.gz```
+
+```sudo chown -R nobody:nogroup /usr/local/lsws/Example/html/wordpress```
 
 You now have a directory called `wordpress` inside `/usr/local/lsws/Example/html`
 
@@ -133,11 +189,20 @@ define( 'DB_PASSWORD', 'MyRootPassword' );
 /** MySQL hostname */
 define( 'DB_HOST', '10.0.0.2' );
 ```
-Below this you should paste in unique Salt Keys, which can be generated [at this site](https://api.wordpress.org/secret-key/1.1/salt/)
+Below this you should paste in unique Salt Keys, which can be generated [at this site](https://api.wordpress.org/secret-key/1.1/salt/).
 
-Finally you are ready to install Wordpress :)
+Save and close the editor.
+
+### Configure Wordpress
+
+add plugin
+
+gutenberg
 
 
+
+### Credits
+Configuration of the OpenLiteSpeed server was based on this [guide on Upcloud.com](https://upcloud.com/community/tutorials/install-wordpress-openlitespeed/).
 
 
 
