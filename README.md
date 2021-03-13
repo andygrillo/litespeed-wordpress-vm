@@ -3,7 +3,7 @@ This guide will demonstrate how to setup a very fast Wordpress installation on a
 
 The OS used is Ubuntu 20.04.
 
-
+These steps allowed me to achieve a 100 score in Google PageSpeed and also GTMetrix whilst using a Gutenberg theme (Kadence).
 
 ## Server Requirements
 This can be installed on a VM with most cloud providers (AWS, Azure, IBM, etc). This guide was tested on a VM in Oracle Cloud.
@@ -95,7 +95,7 @@ Next, you need to configure the OpenLiteSpeed server to host your WordPress site
 
 ```sudo apt-get install openlitespeed```
 
-### Dashboard
+### Configure OpenLiteSpeed in the Dashboard
 Go to `Server Configuration > External App` and click on the edit button:
 ![image](https://user-images.githubusercontent.com/6279965/111042627-e6fc6100-8403-11eb-94fc-72c6de6127e4.png)
 
@@ -141,8 +141,6 @@ Once you’ve configured the OpenLiteSpeed server, Click the gracefully restart 
 
 ![image](https://user-images.githubusercontent.com/6279965/111042770-99342880-8404-11eb-8182-065d14284e29.png)
 
-
-You should now
 
 ## Install Wordpress
 
@@ -191,17 +189,44 @@ define( 'DB_HOST', '10.0.0.2' );
 ```
 Below this you should paste in unique Salt Keys, which can be generated [at this site](https://api.wordpress.org/secret-key/1.1/salt/).
 
-Save and close the editor.
+Save and close the editor
 
-### Configure Wordpress
+## Configure Wordpress
+If you navigate to the VM's IP address, you should now be presented with the Wordpress welcome screen. Create your user and enter.
 
-add plugin
+### Configure LiteSpeed plugin
+To ensure you get the best performance install the `LiteSpeed Cache` plugin. These settings work for me:
 
-gutenberg
+#### Cache Section
+In `General` Tab:
+![image](https://user-images.githubusercontent.com/6279965/111042969-84a46000-8405-11eb-8d31-a84973515fb9.png)
+
+In `Cache` turn everything to `ON` except `Cache Mobile`.
+
+In `Object` turn on `Object Cache` and choose Redis or Memcached. To install Redis you can follow this [guide](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-20-04). You should also turn on `Persistent Connection` and `Cache Wp-Admin`.
+
+In `Browser` turn on the `Browser Cache`
+
+#### CDN Section
+Leave everything off but turn on Cloudflare API (if using Cloudflare). Here add your credentials and ensure the IP address has been added to the Cloudflare DNS. 
+
+#### Image Optimization Section
+In the settings I leave everything off apart from `Image WebP Replacement`. I then use the `Imagify` Plugin to do compression and webp generation. In Imagify I select `Use <picture> tags` but do not specify a URL.
+
+#### Page Optimization Section
+- CSS: Leave everything on apart from `Load CSS Asynchronously`
+- JS: Leave everything on and choose `Default` Load Inline JS 
+- Optimization: Leave everything on apart from `Remove Query Strings`, `Remove Google Fonts` and `Remove Noscript Tag`
 
 
 
-### Credits
+### Select Theme
+With the advent of Wordpress 5.7 it is now recommended to use Gutenberg, the built-in page builder. This has significant advantages over 3rd party builders such as Elimentor or WPBakery.
+
+I found the Kadence site to be very fast and also free !
+
+
+## Credits
 Configuration of the OpenLiteSpeed server was based on this [guide on Upcloud.com](https://upcloud.com/community/tutorials/install-wordpress-openlitespeed/).
 
 
