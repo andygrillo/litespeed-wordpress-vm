@@ -21,15 +21,17 @@ Assuming you are using an external managed database, be sure that it is visible 
 
 You will also need to open ports internally on the subnet for `3306` and `33060`, but restricting access to instances on the internal subnet only.
 
+Be sure to remember the username and password!
+
 ## Setup the VM
 Once provisioned, SSH into the VM using keys or password to get started.
 
-#### Update your system
+### Update your system
 ```sudo apt-get update```
 
 ```sudo apt-get upgrade -y```
 
-#### Open your firewall (optional)
+### Open your firewall (optional)
 If required, as with Oracle Cloud, open the necessary ports in the firewall:
 
 ```sudo apt install firewalld```
@@ -44,7 +46,7 @@ Then reload the firewall
 
 ```sudo firewall-cmd --reload ```
 
-#### Create a database
+### Create a database
 Create the MySQL client on the VM:
 
 ```cd /tmp```
@@ -74,24 +76,35 @@ Once in the MySQL client:
 
 ```mysql-js> GRANT ALL PRIVILEGES ON wordpress.* TO wp;```
 
-#### Install OpenLiteSpeed
-
-```wget -O - http://rpms.litespeedtech.com/debian/enable_lst_debian_repo.sh | sudo bash```
-
-```sudo apt-get install openlitespeed```
-
-#### Install PHP 7.4
+### Install PHP 7.4
 
 You will need PHP 7.4 or higher:
 
 ```sudo apt-get install lsphp74```
 
-```sudo apt install lsphp74-common lsphp74-curl lsphp74-imap lsphp74-json \
-lsphp74-mysql lsphp74-opcache lsphp74-imagick lsphp74-memcached lsphp74-redis```
+```sudo apt install lsphp74-common lsphp74-curl lsphp74-imap lsphp74-json lsphp74-mysql lsphp74-opcache lsphp74-imagick lsphp74-memcached lsphp74-redis```
 
+### Install OpenLiteSpeed
 
+```wget -O - http://rpms.litespeedtech.com/debian/enable_lst_debian_repo.sh | sudo bash```
 
+```sudo apt-get install openlitespeed```
 
+### Setup Wordpress
+
+Navigate to the virtual host:
+
+```cd /usr/local/lsws/Example/html/```
+
+Get latest Wordpress
+
+```wget https://wordpress.org/latest.tar.gz```
+
+Extract:
+
+```tar xvfz latest.tar.gz```
+
+You now have a directory called `wordpress` inside `/usr/local/lsws/Example/html`
 
 
 
