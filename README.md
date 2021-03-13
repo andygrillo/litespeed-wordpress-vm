@@ -199,14 +199,11 @@ If you navigate to the VM's IP address, you should now be presented with the Wor
 To ensure you get the best performance install the `LiteSpeed Cache` plugin. These settings work for me:
 
 #### Cache Section
-In `General` Tab:
+- In `General` Tab:
 ![image](https://user-images.githubusercontent.com/6279965/111042969-84a46000-8405-11eb-8d31-a84973515fb9.png)
-
-In `Cache` turn everything to `ON` except `Cache Mobile`.
-
-In `Object` turn on `Object Cache` and choose Redis or Memcached. To install Redis you can follow this [guide](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-20-04). You should also turn on `Persistent Connection` and `Cache Wp-Admin`.
-
-In `Browser` turn on the `Browser Cache`
+- In `Cache` turn everything to `ON` except `Cache Mobile`.
+- In `Object` turn on `Object Cache` and choose Redis or Memcached. To install Redis you can follow this [guide](https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-redis-on-ubuntu-20-04). You should also turn on `Persistent Connection` and `Cache Wp-Admin`.
+- In `Browser` turn on the `Browser Cache`
 
 #### CDN Section
 Leave everything off but turn on Cloudflare API (if using Cloudflare). Here add your credentials and ensure the IP address has been added to the Cloudflare DNS. 
