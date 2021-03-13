@@ -15,7 +15,7 @@ You should specify the CPU and RAM to match your expected load, but these are se
 Please open ports `80` and `443` for HTTP and HTTPS, and also `7080` for the OpenLiteSpeed dashboard.
 
 ### Database
-For this guide I used an external managed MySQL database on the same virtual network, although you are welcome to host a database on the same VM as Wordpress. By hosting the database separately you will typically have better performance as resources are not shared, and also a backup if the VM fails.
+For this guide I used an external managed MySQL database on the same virtual network, although you are welcome to host a database on the same VM as Wordpress. By hosting the database separately you will typically have better performance as resources are not shared, and also a backup if the VM fails. If however you wish to install a local database you can with `sudo apt install mariadb-server`.
 
 Assuming you are using an external managed database, be sure that it is visible to the VM. This is done by hosting on the same subnet, eg. if your VM has an IP of 10.0.0.1, the database could be on 10.0.0.2. 
 
@@ -43,6 +43,14 @@ If required, as with Oracle Cloud, open the necessary ports in the firewall:
 Then reload the firewall
 
 ```sudo firewall-cmd --reload ```
+
+#### Install OpenLiteSpeed
+
+```wget -O - http://rpms.litespeedtech.com/debian/enable_lst_debian_repo.sh | sudo bash```
+
+```sudo apt-get install openlitespeed```
+
+
 
 
 
