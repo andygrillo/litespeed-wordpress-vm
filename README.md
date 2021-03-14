@@ -30,9 +30,13 @@ Be sure to remember the username and password!
 Once provisioned, SSH into the VM using keys or password to get started.
 
 ### Update your system
-```sudo apt-get update```
+```shell
+sudo apt-get update
+```
 
-```sudo apt-get upgrade -y```
+```shell
+sudo apt-get upgrade -y
+```
 
 ### Open your firewall (optional)
 If required, as with Oracle Cloud, open the necessary ports in the firewall:
