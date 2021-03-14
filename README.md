@@ -63,62 +63,94 @@ sudo firewall-cmd --zone=public --permanent --add-port=7080/tcp
 
 Then reload the firewall
 
-```sudo firewall-cmd --reload ```
+```console
+sudo firewall-cmd --reload
+```
 
 ### Create a database
 Create the MySQL client on the VM:
 
-```cd /tmp```
+```console
+cd /tmp
+```
 
-```curl -OL https://dev.mysql.com/get/mysql-apt-config_0.8.15-1_all.deb```
+```console
+curl -OL https://dev.mysql.com/get/mysql-apt-config_0.8.15-1_all.deb
+```
 
 and add to your system's repository list and begin installation:
 
-```sudo dpkg -i mysql-apt-config*```
+```console
+sudo dpkg -i mysql-apt-config*
+```
 
 During installation you will be be asked which product to configure. Just use the default by selecting `OK`. Then run `sudo apt update
 ` to refresh your apt cache.
 
 Now install MySQL client and you're set:
 
-```sudo apt install mysql-shell```
+```console
+sudo apt install mysql-shell
+```
 
 Login to the external datatbase using the correct IP address and user:
 
-```$ mysqlsh --sql root@10.0.0.2:3306```
+```console
+mysqlsh --sql root@10.0.0.2:3306
+```
 
 Once in the MySQL client:
 
-```mysql-js> CREATE DATABASE wordpress;```
+```console
+$ mysql-js> CREATE DATABASE wordpress;
+```
 
-```mysql-js> CREATE USER wp IDENTIFIED BY 'MyCrazyP3assword!';```
+```console
+$ mysql-js> CREATE USER wp IDENTIFIED BY 'MyCrazyP3assword!';
+```
 
-```mysql-js> GRANT ALL PRIVILEGES ON wordpress.* TO wp;```
+```console
+$ mysql-js> GRANT ALL PRIVILEGES ON wordpress.* TO wp;
+```
 
 ### Install PHP 7.4
 
 You will need PHP 7.4 or higher:
 
-```sudo apt-get install lsphp74```
+```console
+sudo apt-get install lsphp74
+```
 
-```sudo apt install lsphp74-common lsphp74-curl lsphp74-imap lsphp74-json lsphp74-mysql lsphp74-opcache lsphp74-imagick lsphp74-memcached lsphp74-redis```
+```console
+sudo apt install lsphp74-common lsphp74-curl lsphp74-imap lsphp74-json lsphp74-mysql lsphp74-opcache lsphp74-imagick lsphp74-memcached lsphp74-redis
+```
 
 ### Install Redis
 
-```sudo apt install redis```
+```console
+sudo apt install redis
+```
 
-```sudo systemctl start redis-server```
+```console
+sudo systemctl start redis-server
+```
 
-```sudo systemctl enable redis-server```
+```console
+sudo systemctl enable redis-server
+```
 
 ## Install and Configure OpenLiteSpeed
 Next, you need to configure the OpenLiteSpeed server to host your WordPress site. It requires you to set the right version of PHP processor, enable the rewrite module and several other features.
 
 ### Install OpenLiteSpeed
 
-```wget -O - http://rpms.litespeedtech.com/debian/enable_lst_debian_repo.sh | sudo bash```
+```console
+wget -O - http://rpms.litespeedtech.com/debian/enable_lst_debian_repo.sh | sudo bash
+```
 
-```sudo apt-get install openlitespeed```
+```console
+sudo apt-get install openlitespeed
+```
 
 ### Configure OpenLiteSpeed in the Dashboard
 Go to `Server Configuration > External App` and click on the edit button:
@@ -171,31 +203,47 @@ Once you’ve configured the OpenLiteSpeed server, Click the gracefully restart 
 
 Navigate to the virtual host:
 
-```cd /usr/local/lsws/Example/html/```
+```console
+cd /usr/local/lsws/Example/html/
+```
 
 Get latest Wordpress
 
-```wget https://wordpress.org/latest.tar.gz```
+```console
+wget https://wordpress.org/latest.tar.gz
+```
 
 Extract:
 
-```tar xvfz latest.tar.gz```
+```console
+tar xvfz latest.tar.gz
+```
 
-```sudo chown -R nobody:nogroup /usr/local/lsws/Example/html/wordpress```
+```console
+sudo chown -R nobody:nogroup /usr/local/lsws/Example/html/wordpress
+```
 
 You now have a directory called `wordpress` inside `/usr/local/lsws/Example/html`
 
 Setup the files ownership and permissions:
 
-```sudo chown -R nobody:nogroup /usr/local/lsws/Example/html/wordpress```
+```console
+sudo chown -R nobody:nogroup /usr/local/lsws/Example/html/wordpress
+```
 
-```sudo find /usr/local/lsws/Example/html/wordpress/ -type d -exec chmod 750 {} \;```
+```console
+sudo find /usr/local/lsws/Example/html/wordpress/ -type d -exec chmod 750 {} \;
+```
 
-```sudo find /usr/local/lsws/Example/html/wordpress/ -type f -exec chmod 640 {} \;```
+```console
+sudo find /usr/local/lsws/Example/html/wordpress/ -type f -exec chmod 640 {} \;
+```
 
 Change the wp-config.php file to point wordpress to our external datatabse.
 
-```sudo nano /usr/local/lsws/Example/html/wordpress/wp-config.php```
+```console
+sudo nano /usr/local/lsws/Example/html/wordpress/wp-config.php
+```
 
 Where you find `** MySQL settings...` copy in the following using your own values:
 ```
