@@ -18,7 +18,11 @@ Make sure you have a fixed IP address.
 Open ports `80` and `443` for HTTP and HTTPS, and also `7080` for the OpenLiteSpeed dashboard.
 
 ### Database
-For this guide I used an external managed MySQL database on the same virtual network, although you are welcome to host a database on the same VM as Wordpress. By hosting the database separately you will typically have better performance as resources are not shared, and also a backup if the VM fails. If however you wish to install a local database you can with `sudo apt install mariadb-server`.
+For this guide I used an external managed MySQL database on the same virtual network, although you are welcome to host a database on the same VM as Wordpress. By hosting the database separately you will typically have better performance as resources are not shared, and also a backup if the VM fails. If however you wish to install a local database you can with 
+
+```console
+sudo apt install mariadb-server
+```
 
 Assuming you are using an external managed database, be sure that it is visible to the VM. This is done by hosting on the same subnet, eg. if your VM has an IP of 10.0.0.1, the database could be on 10.0.0.2. 
 
@@ -30,24 +34,32 @@ Be sure to remember the username and password!
 Once provisioned, SSH into the VM using keys or password to get started.
 
 ### Update your system
-```shell
+```console
 sudo apt-get update
 ```
 
-```shell
+```console
 sudo apt-get upgrade -y
 ```
 
 ### Open your firewall (optional)
 If required, as with Oracle Cloud, open the necessary ports in the firewall:
 
-```sudo apt install firewalld```
+```console
+sudo apt install firewalld
+```
 
-```sudo firewall-cmd --zone=public --permanent --add-port=80/tcp```
+```console
+sudo firewall-cmd --zone=public --permanent --add-port=80/tcp
+```
 
-```sudo firewall-cmd --zone=public --permanent --add-port=443/tcp```
+```console
+sudo firewall-cmd --zone=public --permanent --add-port=443/tcp
+```
 
-```sudo firewall-cmd --zone=public --permanent --add-port=7080/tcp```
+```console
+sudo firewall-cmd --zone=public --permanent --add-port=7080/tcp
+```
 
 Then reload the firewall
 
