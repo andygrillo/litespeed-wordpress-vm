@@ -5,6 +5,8 @@ The OS used is Ubuntu 20.04.
 
 These steps allowed me to achieve a 100 score in Google PageSpeed and also GTMetrix whilst using a Gutenberg theme (Kadence).
 
+For [hosting multiple sites](https://openlitespeed.org/kb/setting-up-name-based-virtual-hosting-on-openlitespeed/) on a single server.
+
 ## Server Requirements
 This can be installed on a VM with most cloud providers (AWS, Azure, IBM, etc). This guide was tested on a VM in Oracle Cloud.
 
