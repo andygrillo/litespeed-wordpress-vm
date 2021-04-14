@@ -221,10 +221,6 @@ Extract:
 tar xvfz latest.tar.gz
 ```
 
-```console
-sudo chown -R nobody:nogroup /usr/local/lsws/Example/html/wordpress
-```
-
 You now have a directory called `wordpress` inside `/usr/local/lsws/Example/html`
 
 Setup the files ownership and permissions:
@@ -268,6 +264,11 @@ Save and close the editor
 
 ## Configure Wordpress
 If you navigate to the VM's IP address, you should now be presented with the Wordpress welcome screen. Create your user and enter.
+
+If you can't see Wordpress, try again:
+```console
+sudo chown -R nobody:nogroup /usr/local/lsws/Example/html/wordpress
+```
 
 ### Configure LiteSpeed plugin
 To ensure you get the best performance install the `LiteSpeed Cache` plugin. These settings work for me:
