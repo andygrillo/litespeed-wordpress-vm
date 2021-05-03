@@ -10,7 +10,7 @@ For [hosting multiple sites](https://openlitespeed.org/kb/setting-up-name-based-
 ## Server Requirements
 This can be installed on a VM with most cloud providers (AWS, Azure, IBM, etc). This guide was tested on a VM in Oracle Cloud.
 
-You should specify the CPU and RAM to match your expected load, but these are settings for a small/medium VM that have worked for me:
+You should specify the CPU and RAM to match your expected load, but these are settings for a medium VM that have worked for me:
 - 2 CPUs
 - 8 GB RAM
 - 15 GB Drive
