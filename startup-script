@@ -1,0 +1,27 @@
+#!/bin/bash
+apt update -y
+apt install firewalld -y
+firewall-cmd --zone=public --permanent --add-port=80/tcp
+firewall-cmd --zone=public --permanent --add-port=443/tcp
+firewall-cmd --zone=public --permanent --add-port=7080/tcp
+firewall-cmd --reload
+wget -O - http://rpms.litespeedtech.com/debian/enable_lst_debian_repo.sh | sudo bash
+apt-get install lsphp74 -y
+apt install lsphp74-common lsphp74-curl lsphp74-imap lsphp74-json lsphp74-mysql lsphp74-opcache lsphp74-imagick lsphp74-memcached lsphp74-redis -y
+apt-get install openlitespeed -y
+/usr/local/lsws/bin/lswsctrl start
+cd /tmp
+git clone https://github.com/andygrillo/litespeed-wordpress-vm.git
+cp litespeed-wordpress-vm/httpd_config.conf /usr/local/lsws/conf/
+cp litespeed-wordpress-vm/vhconf.conf /usr/local/lsws/conf/vhosts/Example/
+/usr/local/lsws/bin/lswsctrl restart
+apt install redis -y
+systemctl start redis-server
+systemctl enable redis-server
+cd /usr/local/lsws/Example/html/
+wget https://wordpress.org/latest.tar.gz
+tar xvfz latest.tar.gz
+chown -R nobody:nogroup /usr/local/lsws/Example/html/wordpress
+find /usr/local/lsws/Example/html/wordpress/ -type d -exec chmod 750 {} \;
+find /usr/local/lsws/Example/html/wordpress/ -type f -exec chmod 640 {} \;
+chown -R nobody:nogroup /usr/local/lsws/Example/html/wordpress
