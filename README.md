@@ -45,7 +45,7 @@ We will use the (**f1-micro**) which costs nothing... for ever! . You can upgrad
 - open ports: HTTP, HTTPS
 - Boot disk: Ubuntu 20.04 LTS
 - Networking apply tag: `wordpressvm` ,
-- use a Bootstrap script (supplied below) to install OpenLitespeed, Wordpress, PHP
+- use a startup script to install OpenLitespeed, Wordpress, PHP :
 
 ```jsx
 #!/bin/bash
