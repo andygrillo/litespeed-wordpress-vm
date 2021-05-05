@@ -35,7 +35,9 @@ This solution is [free (VM), $7.67 (Mysql)] for many WP installs, unlimited visi
 
 ## 1: Faster Hosting
 
-## Setup a VM Instance
+## Setup a VM Instance with Google Cloud
+
+You can use any cloud (I've used Oracle, AWS, Azure), but Google seems to be the most cost-effective option.
 
 We will use the (**f1-micro**) which costs nothing... for ever! . You can upgrade this to a better CPU if needed later.
 
