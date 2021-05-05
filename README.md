@@ -18,7 +18,7 @@ However, Google Core Web Vitals update this year will make performance more impo
 
 Using Siteground, WP Engine or Kinsta are all great options for the average user.
 
-However with the solution I am going to describe, you can improve your Pagespeed, in my tests, by 10 points (do a Kinsta comparison in next video)
+However with the solution here you can improve your Pagespeed, in my tests, by 10 points (do a Kinsta comparison in next video)
 
 ### and Monthly Cost ?
 
