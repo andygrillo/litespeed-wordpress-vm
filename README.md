@@ -24,9 +24,11 @@ However with the solution here you can improve your Pagespeed, in my tests, by 1
 
 For this example I will use Google Cloud + Cloudflare. You can get $350 credits if you sign up using the link below, $50 more than usual.
 
-[Kinsta](https://kinsta.com/plans/?plan=visits-pro&interval=month) is $30 for 1 WP install, 25k visits, 10gb disk, SSL + CDN
+[Kinsta](https://kinsta.com/plans/?plan=visits-pro&interval=month) is $30 for 1 WP install, 25k visits, 10gb disk, SSL + CDN.
 
-This solution is [free (VM), $7.67 (Mysql)] for many WP installs, unlimited visits, 10gb disk, SSL +CDN  with fast Litespeed caching
+This solution is [free (VM), $7.67 (Mysql)] for many WP installs, unlimited visits, 10gb disk, SSL +CDN  with fast Litespeed caching.
+
+You can scale the VM and database specs as necessary when your site grows.
 
 ## Let's get started.
 
@@ -77,11 +79,14 @@ find /usr/local/lsws/Example/html/wordpress/ -type f -exec chmod 640 {} \;
 chown -R nobody:nogroup /usr/local/lsws/Example/html/wordpress
 ```
 
+## Add Networking Rules
 - Networking>VPC Networks>Firewall
-- add 7080 firewall rule with IP range: 0.0.0.0/0
-- add 3306, 33060 firewall rule with IP range: 10.0.0.0/0
+- add `7080` firewall rule with IP range: `0.0.0.0/0`
+- add `3306`, `33060` firewall rule with IP range: `10.0.0.0/0`
 
-- SSH connect to create password for OpenLitespeed dashboard:
+At this point, go and make a coffee. It takes some time for your new VM to process the startup script. You will know its ready when you can successfully do the following command in SSH:
+
+- SSH connect, from the Google cloud portal next to your VM, to create password for OpenLitespeed dashboard:
 
 ```bash
 sudo /usr/local/lsws/admin/misc/admpass.sh
@@ -93,13 +98,13 @@ sudo /usr/local/lsws/admin/misc/admpass.sh
 http://102.021.03.2:7080
 ```
 
-- Add ip address or domain  and do Soft Restart
+- Add ip address or domain and do Soft Restart
 
 ```jsx
 >Listeners>Default>Virtual Host Mappings>Domains
 ```
 
-- Take down the Primary Internal IP `10.128.0.2`
+- Copy the Primary Internal IP `10.128.0.2`
 
 ## Setup a separate MySQL database
 
@@ -111,6 +116,19 @@ We will then use a separate managed MySQL database (**db.t2.micro**)
 - Storage: 10GB
 - Connections: Private IP, `default` automatic IP range.
 - Connections: no Public
-- Connect to add IP of VM: `10.128.0.2`
+- Connect to add IP of VM: `10.128.0.2` (or your specific IP)
 - Click on instance to get IP of database
 - Create database `wordpress`
+
+Now you can login to your website again, using the IP of your instance, and enter the details:
+```
+Database name: Wordpress
+Username: Root
+Password: (password created with MySQSL)
+Database Host: Internal IP of MySQL
+Table Prefix: wp_
+```
+Your site should now be ready!
+
+
+
