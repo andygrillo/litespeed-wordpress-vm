@@ -22,7 +22,7 @@ However with the solution here you can improve your Pagespeed, in my tests, by 1
 
 ### and Monthly Cost ?
 
-For this example I will use Google Cloud + Cloudflare. You can get $350 credits if you sign up using the link below, $50 more than usual.
+For this example I will use Google Cloud + Cloudflare. You can get $300 credits if you sign up for a new Google Cloud account.
 
 [Kinsta](https://kinsta.com/plans/?plan=visits-pro&interval=month) is $30 for 1 WP install, 25k visits, 10gb disk, SSL + CDN.
 
