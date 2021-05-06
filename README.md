@@ -4,7 +4,7 @@
 
 Performance is already important for modern Wordpress sites as users don't want to wait for loading. 
 
-However, Google Core Web Vitals update this year will make performance more important page ranking will be impacted significantly. This is measured using tools such as Pagespeed (show image).
+However, Google Core Web Vitals update this year will make performance more important page ranking will be impacted significantly. This is measured using tools such as Pagespeed.
 
 ### What Can I do about this for my Wordpress site?
 
